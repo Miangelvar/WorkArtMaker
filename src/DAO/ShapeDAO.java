@@ -5,6 +5,7 @@
  */
 package DAO;
 
+import Models.Ellipse;
 import Models.Line;
 import Models.Rectangle;
 import Models.Shape;
@@ -31,6 +32,10 @@ public class ShapeDAO {
     
     public void addLine(Line line){
         shapes.add(line);
+    }
+    
+    public void addEllipse(Ellipse ellipse){
+        shapes.add(ellipse);
     }
 
     public ArrayList<Shape> getShapes() {

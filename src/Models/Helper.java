@@ -32,9 +32,11 @@ public class Helper {
             }
             if (shape.getClass() == Ellipse.class) {
                 Ellipse ellipse = (Ellipse)shape;
+                graphics.fillOval(ellipse.getX(), ellipse.getY(), ellipse.getWidth(), ellipse.getHeight());
             }
             if (shape.getClass() == Line.class) {
                 Line line = (Line)shape;
+                graphics.drawLine(line.getX(), line.getY(), line.getX2(), line.getY2());
             }
         }
     }

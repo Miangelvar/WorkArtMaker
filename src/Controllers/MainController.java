@@ -2,6 +2,7 @@ package Controllers;
 
 
 import DAO.ShapeDAO;
+import Models.Ellipse;
 import Models.Line;
 import Models.Rectangle;
 import Models.Square;
@@ -27,6 +28,7 @@ public class MainController {
     ShapeDAO shapes=new ShapeDAO();
     Rectangle rectangle=new Rectangle(100,50,1,1,Color.red);
     Square square = new Square(200,100,100,Color.green);
+    Ellipse ellipse;
     
     int x1,x2,y1,y2;
     
@@ -38,10 +40,72 @@ public class MainController {
         window.setPanel();
         window.setVisible(true);
         window.setLocationRelativeTo(null);
+        
     }
     
+    public void initControllers() {
+//        drawRectangle();
+        drawEllipse();
+    }    
     
-    public void drawRectangle(){
+    private void drawEllipse(){
+        listener= new MouseListener(){
+            @Override
+            public void mouseClicked(MouseEvent e) {
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+                x1=e.getX();
+                y1=e.getY();
+                System.out.println(x1);
+                System.out.println(y1);
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                x2=e.getX();
+                y2=e.getY();
+                
+                System.out.println(x2);
+                System.out.println(y2);
+                
+                int width=Math.abs(x2-x1);
+                int height=Math.abs(y2-y1);
+                
+                if (x2 < x1 && y2 < y1) {
+                    ellipse = new Ellipse(width,height,x2,y2,Color.RED);
+                    shapes.addEllipse(ellipse);
+                    window.getPanel().repaint();
+                } else if (x2 < x1 && y2 > y1){
+                    ellipse = new Ellipse(width,height,x2,y1,Color.RED);
+                    shapes.addEllipse(ellipse);
+                    window.getPanel().repaint();
+                } else if(x2 > x1 && y2 < y1) { 
+                    ellipse = new Ellipse(width,height,x1,y2,Color.RED);
+                    shapes.addEllipse(ellipse);
+                    window.getPanel().repaint();
+                } else {
+                    ellipse = new Ellipse(width,height,x1,y1,Color.RED);
+                    shapes.addEllipse(ellipse);
+                    window.getPanel().repaint();
+                }
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+            }
+            
+            
+        };
+        window.getPanel().addMouseListener(listener);
+    }
+        
+    private void drawRectangle(){
         listener= new MouseListener(){
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -97,7 +161,8 @@ public class MainController {
         };
         window.getPanel().addMouseListener(listener);
     }
-    public void drawSquare() {
+    
+    private void drawSquare() {
         listener = new MouseListener() {
             
             @Override
@@ -149,18 +214,17 @@ public class MainController {
         };
         window.getPanel().addMouseListener(listener);
     }
-    public void drawLine() {
+    
+    private void drawLine() {
         listener = new MouseListener(){
             @Override
             public void mouseClicked(MouseEvent e) {
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
             }
 
             @Override
             public void mousePressed(MouseEvent e) {
                 x1 = e.getX();
                 y1 = e.getY();
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
             }
 
             @Override
@@ -170,19 +234,15 @@ public class MainController {
                 
                 Line line = new Line(x1, y1, x2, y2, Color.BLACK);
                 shapes.addLine(line);
-                window.getPanel().repaint();
-                
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                window.getPanel().repaint();            
             }
 
             @Override
             public void mouseEntered(MouseEvent e) {
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
             }
 
             @Override
             public void mouseExited(MouseEvent e) {
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
             }
         
         };        
