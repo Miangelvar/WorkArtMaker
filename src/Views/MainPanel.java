@@ -5,38 +5,51 @@
  */
 package Views;
 
-import DAO.ShapeDAO;
+import DAO.ShapesDAO;
 import Models.Helper;
-import Models.Rectangle;
-import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Image;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JPanel;
 
 /**
  *
- * @author Jeremy
+ * @author miguel
  */
 public class MainPanel extends javax.swing.JPanel {
-    ShapeDAO shapes;
+    ShapesDAO shapes;
     Helper helper;
     int x1,y1,x2,y2;
-    int aux;
-    /**
-     * Creates new form MainPanel
-     */
-    public MainPanel(ShapeDAO shapes) {
-        initComponents();
-        this.shapes=shapes;
+    Image painting;
+
+    public void setPainting(Image painting) {
+        this.painting = painting;
     }
 
+    /**
+     * Creates new form MainPanel
+     * @param shapes
+     */
+    public MainPanel(ShapesDAO shapes) {
+        initComponents();
+        this.shapes=shapes;       
+    }
+
+    public void setShapes(ShapesDAO shapes) {
+        this.shapes = shapes;
+    }
+    
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g); //To change body of generated methods, choose Tools | Templates.
+            
+        if (painting != null) {
+            System.out.println("Image Found");
+            g.drawImage(painting, 0, 0, this);
+        }   
         helper=new Helper(g);
         helper.draw(shapes);
-//        if (aux==1) {
-//            g.setColor(Color.blue);
-//            g.fillRect(x1, y1, x2-x1,y2-y1);
-//        }
     }
 
     public int getX1() {
@@ -70,14 +83,43 @@ public class MainPanel extends javax.swing.JPanel {
     public void setY2(int y2) {
         this.y2 = y2;
     }
-
-    public int getAux() {
-        return aux;
+    
+    public ShapesDAO getShapes() {
+        return shapes;
     }
 
-    public void setAux(int aux) {
-        this.aux = aux;
+    public Helper getHelper() {
+        return helper;
     }
+
+    public JComboBox<String> getColorsComboBox() {
+        return colorsComboBox;
+    }
+
+    public JButton getLoadDrawingButton() {
+        return loadDrawingButton;
+    }
+
+    public JButton getLoadImageButton() {
+        return loadImageButton;
+    }
+
+    public JButton getSaveDrawingButton() {
+        return saveDrawingButton;
+    }
+
+    public JComboBox<String> getShapesComboBox() {
+        return shapesComboBox;
+    }
+
+    public JButton getClearButton() {
+        return clearButton;
+    }   
+    
+    public JPanel getToolPanel() {
+        return toolPanel;
+    }
+    
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -88,6 +130,14 @@ public class MainPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        toolPanel = new javax.swing.JPanel();
+        shapesComboBox = new javax.swing.JComboBox<>();
+        colorsComboBox = new javax.swing.JComboBox<>();
+        loadImageButton = new javax.swing.JButton();
+        loadDrawingButton = new javax.swing.JButton();
+        saveDrawingButton = new javax.swing.JButton();
+        clearButton = new javax.swing.JButton();
+
         addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 formMousePressed(evt);
@@ -97,15 +147,66 @@ public class MainPanel extends javax.swing.JPanel {
             }
         });
 
+        shapesComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Line", "Square", "Rectangle", "Circle", "Ellipse" }));
+
+        colorsComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Blue", "Yellow", "Red" }));
+
+        loadImageButton.setText("Load Image");
+
+        loadDrawingButton.setText("Load Drawing");
+
+        saveDrawingButton.setText("Save Drawing");
+
+        clearButton.setText("Clear");
+        clearButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clearButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout toolPanelLayout = new javax.swing.GroupLayout(toolPanel);
+        toolPanel.setLayout(toolPanelLayout);
+        toolPanelLayout.setHorizontalGroup(
+            toolPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(toolPanelLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(toolPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(shapesComboBox, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(colorsComboBox, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(loadImageButton, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(loadDrawingButton, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(saveDrawingButton, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(clearButton, javax.swing.GroupLayout.Alignment.TRAILING)))
+        );
+        toolPanelLayout.setVerticalGroup(
+            toolPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(toolPanelLayout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addComponent(shapesComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(colorsComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(loadImageButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(loadDrawingButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(saveDrawingButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(clearButton)
+                .addContainerGap(73, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 295, Short.MAX_VALUE)
+                .addComponent(toolPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addComponent(toolPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -121,7 +222,20 @@ public class MainPanel extends javax.swing.JPanel {
 //        repaint();
     }//GEN-LAST:event_formMouseReleased
 
+    private void clearButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_clearButtonActionPerformed
+   
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton clearButton;
+    private javax.swing.JComboBox<String> colorsComboBox;
+    private javax.swing.JButton loadDrawingButton;
+    private javax.swing.JButton loadImageButton;
+    private javax.swing.JButton saveDrawingButton;
+    private javax.swing.JComboBox<String> shapesComboBox;
+    private javax.swing.JPanel toolPanel;
     // End of variables declaration//GEN-END:variables
+
 }

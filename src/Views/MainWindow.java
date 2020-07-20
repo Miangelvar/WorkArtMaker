@@ -5,31 +5,38 @@
  */
 package Views;
 
-import DAO.ShapeDAO;
+import DAO.ShapesDAO;
 import Models.Helper;
+import javax.swing.BoxLayout;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 /**
  *
- * @author Jeremy
+ * @author miguel
  */
 
 public class MainWindow extends javax.swing.JFrame {
     MainPanel panel;
-     ShapeDAO shapes;
+    ShapesDAO shapes;
+//     ContainerPanel container;
+
      
     /**
      * Creates new form MainPanel
+     * @param shapes
      */
-    public MainWindow(ShapeDAO shapes) {
+    public MainWindow(ShapesDAO shapes) {
         initComponents();
         this.shapes=shapes;
     }
     
-    public void setPanel(){
+    public void setPanel() {
+//        containerPanel = new ContainerPanel(shapes);
         panel = new MainPanel(shapes);
         this.setContentPane(panel);
         this.setSize(800,600);
-        this.repaint();
+        this.repaint();        
     }
     
     public MainPanel getPanel(){

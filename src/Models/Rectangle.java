@@ -9,7 +9,7 @@ import java.awt.Color;
 
 /**
  *
- * @author Jeremy
+ * @author miguel
  */
 public class Rectangle extends Shape{
     int width, height;

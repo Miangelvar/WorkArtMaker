@@ -3,11 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/miguel/NetBeansProjects/WorkArtMaker/src/workartmaker/WorkArtMaker.java</file>
+            <file>file:/home/miguel/NetBeansProjects/WorkArtMaker/src/Views/MainPanel.java</file>
             <file>file:/home/miguel/NetBeansProjects/WorkArtMaker/src/Controllers/MainController.java</file>
-            <file>file:/home/miguel/NetBeansProjects/WorkArtMaker/src/Models/Helper.java</file>
-            <file>file:/home/miguel/NetBeansProjects/WorkArtMaker/src/Models/Line.java</file>
-            <file>file:/home/miguel/NetBeansProjects/WorkArtMaker/src/DAO/ShapeDAO.java</file>
+            <file>file:/home/miguel/NetBeansProjects/WorkArtMaker/src/Views/MainWindow.java</file>
         </group>
     </open-files>
 </project-private>
